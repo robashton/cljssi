@@ -2,6 +2,11 @@
 
 (def canvas-width 640)
 (def canvas-height 480)
+(def key-states (atom {}))
+
+
+(defn is-left-pressed [] (@key-states 37))
+(defn is-right-pressed [] (@key-states 39))
 
 (defn log [& v]
   (.log js/console v))
@@ -21,7 +26,10 @@
 
 (defrecord Player [x y]
   Entity
-  (tick [this] this)
+  (tick [this] 
+    (cond (is-left-pressed) (update-in this [:x] (partial + 2))
+          (is-right-pressed) (update-in this [:x] (partial - 2)) 
+          :else this))
   (render [this ctx]
     (set! (. ctx -fillStyle) "#00F")
     (.fillRect ctx x y 20 20) ))
@@ -62,5 +70,20 @@
     (game-tick ctx (get-next-state state) )) 33))
 
 (defn ^:export init []
+  (hook-input-events)
   (let [ctx (context canvas-width canvas-height)] 
     (game-tick ctx (create-state))))
+
+
+(defn hook-input-events []
+  (.addEventListener js/document "keydown" 
+   (fn [e]
+    (set-key-state (. e -keyCode) true)
+     false))
+  (.addEventListener js/document "keyup" 
+   (fn [e]
+    (set-key-state (. e -keyCode) false)
+     false)))
+
+(defn set-key-state [code, value]
+  (swap! key-states assoc code value))
