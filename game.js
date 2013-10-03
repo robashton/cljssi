@@ -1652,7 +1652,7 @@ cljs.core._invoke = function() {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
     return t.call(null, a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s)
-  }, v = function(a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t) {
+  }, w = function(a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t) {
     if(a ? a.cljs$core$IFn$_invoke$arity$17 : a) {
       return a.cljs$core$IFn$_invoke$arity$17(a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t)
     }
@@ -1662,7 +1662,7 @@ cljs.core._invoke = function() {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
     return u.call(null, a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t)
-  }, w = function(a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t, u) {
+  }, v = function(a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t, u) {
     if(a ? a.cljs$core$IFn$_invoke$arity$18 : a) {
       return a.cljs$core$IFn$_invoke$arity$18(a, b, c, d, e, f, g, h, k, l, m, n, p, q, r, s, t, u)
     }
@@ -1737,9 +1737,9 @@ cljs.core._invoke = function() {
       case 16:
         return t.call(this, a, x, y, z, A, C, D, E, F, G, H, J, K, L, M, N);
       case 17:
-        return v.call(this, a, x, y, z, A, C, D, E, F, G, H, J, K, L, M, N, O);
+        return w.call(this, a, x, y, z, A, C, D, E, F, G, H, J, K, L, M, N, O);
       case 18:
-        return w.call(this, a, x, y, z, A, C, D, E, F, G, H, J, K, L, M, N, O, P);
+        return v.call(this, a, x, y, z, A, C, D, E, F, G, H, J, K, L, M, N, O, P);
       case 19:
         return u.call(this, a, x, y, z, A, C, D, E, F, G, H, J, K, L, M, N, O, P, Q);
       case 20:
@@ -1765,8 +1765,8 @@ cljs.core._invoke = function() {
   a.cljs$core$IFn$_invoke$arity$14 = r;
   a.cljs$core$IFn$_invoke$arity$15 = s;
   a.cljs$core$IFn$_invoke$arity$16 = t;
-  a.cljs$core$IFn$_invoke$arity$17 = v;
-  a.cljs$core$IFn$_invoke$arity$18 = w;
+  a.cljs$core$IFn$_invoke$arity$17 = w;
+  a.cljs$core$IFn$_invoke$arity$18 = v;
   a.cljs$core$IFn$_invoke$arity$19 = u;
   a.cljs$core$IFn$_invoke$arity$20 = B;
   a.cljs$core$IFn$_invoke$arity$21 = I;
@@ -6112,31 +6112,31 @@ cljs.core.apply_to = function(a, b, c) {
   if(14 === b) {
     return a.cljs$core$IFn$_invoke$arity$14 ? a.cljs$core$IFn$_invoke$arity$14(c, d, e, f, g, a, h, k, l, m, n, p, q, r) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r)
   }
-  var s = cljs.core._first.call(null, t), v = cljs.core._rest.call(null, t);
+  var s = cljs.core._first.call(null, t), w = cljs.core._rest.call(null, t);
   if(15 === b) {
     return a.cljs$core$IFn$_invoke$arity$15 ? a.cljs$core$IFn$_invoke$arity$15(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s)
   }
-  var t = cljs.core._first.call(null, v), w = cljs.core._rest.call(null, v);
+  var t = cljs.core._first.call(null, w), v = cljs.core._rest.call(null, w);
   if(16 === b) {
     return a.cljs$core$IFn$_invoke$arity$16 ? a.cljs$core$IFn$_invoke$arity$16(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t)
   }
-  var v = cljs.core._first.call(null, w), u = cljs.core._rest.call(null, w);
+  var w = cljs.core._first.call(null, v), u = cljs.core._rest.call(null, v);
   if(17 === b) {
-    return a.cljs$core$IFn$_invoke$arity$17 ? a.cljs$core$IFn$_invoke$arity$17(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v)
+    return a.cljs$core$IFn$_invoke$arity$17 ? a.cljs$core$IFn$_invoke$arity$17(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w)
   }
-  var w = cljs.core._first.call(null, u), B = cljs.core._rest.call(null, u);
+  var v = cljs.core._first.call(null, u), B = cljs.core._rest.call(null, u);
   if(18 === b) {
-    return a.cljs$core$IFn$_invoke$arity$18 ? a.cljs$core$IFn$_invoke$arity$18(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v, w) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v, w)
+    return a.cljs$core$IFn$_invoke$arity$18 ? a.cljs$core$IFn$_invoke$arity$18(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w, v) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w, v)
   }
   u = cljs.core._first.call(null, B);
   B = cljs.core._rest.call(null, B);
   if(19 === b) {
-    return a.cljs$core$IFn$_invoke$arity$19 ? a.cljs$core$IFn$_invoke$arity$19(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v, w, u) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v, w, u)
+    return a.cljs$core$IFn$_invoke$arity$19 ? a.cljs$core$IFn$_invoke$arity$19(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w, v, u) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w, v, u)
   }
   var I = cljs.core._first.call(null, B);
   cljs.core._rest.call(null, B);
   if(20 === b) {
-    return a.cljs$core$IFn$_invoke$arity$20 ? a.cljs$core$IFn$_invoke$arity$20(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v, w, u, I) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, v, w, u, I)
+    return a.cljs$core$IFn$_invoke$arity$20 ? a.cljs$core$IFn$_invoke$arity$20(c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w, v, u, I) : a.call(null, c, d, e, f, g, a, h, k, l, m, n, p, q, r, s, t, w, v, u, I)
   }
   throw Error("Only up to 20 arguments supported on functions");
 };
@@ -13331,21 +13331,186 @@ cljs.core.comparator = function(a) {
     return cljs.core.truth_(a.call(null, b, c)) ? -1 : cljs.core.truth_(a.call(null, c, b)) ? 1 : 0
   }
 };
-var game = {context:function(a, b) {
-  var c = document.getElementById("target");
-  return cljs.core.PersistentVector.fromArray([c.getContext("2d"), c.width = a, c.height = b], !0)
-}, clear_screen:function(a) {
-  var b = cljs.core.nth.call(null, a, 0, null), c = cljs.core.nth.call(null, a, 1, null);
-  a = cljs.core.nth.call(null, a, 2, null);
-  b.fillStyle = "#000";
-  return b.fillRect(0, 0, c, a)
-}, tick:function tick(b, c) {
-  game.clear_screen.call(null, b);
+var cljsinvaders = {game:{}};
+cljsinvaders.game.canvas_width = 640;
+cljsinvaders.game.canvas_height = 480;
+cljsinvaders.game.log = function() {
+  var a = function(a) {
+    return console.log(a)
+  }, b = function(b) {
+    var d = null;
+    0 < arguments.length && (d = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0));
+    return a.call(this, d)
+  };
+  b.cljs$lang$maxFixedArity = 0;
+  b.cljs$lang$applyTo = function(b) {
+    b = cljs.core.seq(b);
+    return a(b)
+  };
+  b.cljs$core$IFn$_invoke$arity$variadic = a;
+  return b
+}();
+cljsinvaders.game.Entity = {};
+cljsinvaders.game.tick = function(a) {
+  if(a ? a.cljsinvaders$game$Entity$tick$arity$1 : a) {
+    return a.cljsinvaders$game$Entity$tick$arity$1(a)
+  }
+  var b;
+  b = cljsinvaders.game.tick[goog.typeOf(null == a ? null : a)];
+  if(!b && (b = cljsinvaders.game.tick._, !b)) {
+    throw cljs.core.missing_protocol.call(null, "Entity.tick", a);
+  }
+  return b.call(null, a)
+};
+cljsinvaders.game.render = function(a, b) {
+  if(a ? a.cljsinvaders$game$Entity$render$arity$2 : a) {
+    return a.cljsinvaders$game$Entity$render$arity$2(a, b)
+  }
+  var c;
+  c = cljsinvaders.game.render[goog.typeOf(null == a ? null : a)];
+  if(!c && (c = cljsinvaders.game.render._, !c)) {
+    throw cljs.core.missing_protocol.call(null, "Entity.render", a);
+  }
+  return c.call(null, a, b)
+};
+cljsinvaders.game.Enemy = function(a, b, c, d) {
+  this.x = a;
+  this.y = b;
+  this.__meta = c;
+  this.__extmap = d;
+  this.cljs$lang$protocol_mask$partition1$ = 0;
+  this.cljs$lang$protocol_mask$partition0$ = 2229667594;
+  2 < arguments.length ? (this.__meta = c, this.__extmap = d) : this.__extmap = this.__meta = null
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IHash$_hash$arity$1 = function(a) {
+  var b = this.__hash;
+  return null != b ? b : this.__hash = a = cljs.core.hash_imap.call(null, a)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$2 = function(a, b) {
+  return a.cljs$core$ILookup$_lookup$arity$3(a, b, null)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$3 = function(a, b, c) {
+  return"\ufdd0:x" === b ? this.x : "\ufdd0:y" === b ? this.y : cljs.core._lookup.call(null, this.__extmap, b, c)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(a, b, c) {
+  a = cljs.core.identical_QMARK_;
+  return a.call(null, "\ufdd0:x", b) ? new cljsinvaders.game.Enemy(c, this.y, this.__meta, this.__extmap, null) : a.call(null, "\ufdd0:y", b) ? new cljsinvaders.game.Enemy(this.x, c, this.__meta, this.__extmap, null) : new cljsinvaders.game.Enemy(this.x, this.y, this.__meta, cljs.core.assoc.call(null, this.__extmap, b, c), null)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3 = function(a, b, c) {
+  return cljs.core.pr_sequential_writer.call(null, b, function(a) {
+    return cljs.core.pr_sequential_writer.call(null, b, cljs.core.pr_writer, "", " ", "", c, a)
+  }, "#cljsinvaders.game.Enemy{", ", ", "}", c, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", this.x), cljs.core.vector.call(null, "\ufdd0:y", this.y)], !0), this.__extmap))
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$ICollection$_conj$arity$2 = function(a, b) {
+  return cljs.core.vector_QMARK_.call(null, b) ? a.cljs$core$IAssociative$_assoc$arity$3(a, cljs.core._nth.call(null, b, 0), cljs.core._nth.call(null, b, 1)) : cljs.core.reduce.call(null, cljs.core._conj, a, b)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$ISeqable$_seq$arity$1 = function(a) {
+  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", this.x), cljs.core.vector.call(null, "\ufdd0:y", this.y)], !0), this.__extmap))
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$ICounted$_count$arity$1 = function(a) {
+  return 2 + cljs.core.count.call(null, this.__extmap)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(a, b) {
+  return cljs.core.truth_(function() {
+    if(cljs.core.truth_(b)) {
+      var c = a.constructor === b.constructor;
+      return c ? cljs.core.equiv_map.call(null, a, b) : c
+    }
+    return b
+  }()) ? !0 : !1
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
+  return new cljsinvaders.game.Enemy(this.x, this.y, b, this.__extmap, this.__hash)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IMeta$_meta$arity$1 = function(a) {
+  return this.__meta
+};
+cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$ = !0;
+cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$tick$arity$1 = function(a) {
+  return a
+};
+cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$render$arity$2 = function(a, b) {
+  cljsinvaders.game.log.call(null, this.x, this.y, 20, 20);
+  b.fillStyle = "#FF0";
+  return b.fillRect(this.x, this.y, 20, 20)
+};
+cljsinvaders.game.Enemy.prototype.cljs$core$IMap$_dissoc$arity$2 = function(a, b) {
+  return cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.fromArray(["\ufdd0:y", null, "\ufdd0:x", null], !0), b) ? cljs.core.dissoc.call(null, cljs.core.with_meta.call(null, cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, a), this.__meta), b) : new cljsinvaders.game.Enemy(this.x, this.y, this.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, this.__extmap, b)), null)
+};
+cljsinvaders.game.Enemy.cljs$lang$type = !0;
+cljsinvaders.game.Enemy.cljs$lang$ctorPrSeq = function(a) {
+  return cljs.core.list.call(null, "cljsinvaders.game/Enemy")
+};
+cljsinvaders.game.Enemy.cljs$lang$ctorPrWriter = function(a, b) {
+  return cljs.core._write.call(null, b, "cljsinvaders.game/Enemy")
+};
+cljsinvaders.game.__GT_Enemy = function(a, b) {
+  return new cljsinvaders.game.Enemy(a, b)
+};
+cljsinvaders.game.map__GT_Enemy = function(a) {
+  return new cljsinvaders.game.Enemy((new cljs.core.Keyword("\ufdd0:x")).call(null, a), (new cljs.core.Keyword("\ufdd0:y")).call(null, a), null, cljs.core.dissoc.call(null, a, "\ufdd0:x", "\ufdd0:y"))
+};
+cljsinvaders.game.create_enemies = function() {
+  return function b(c) {
+    return new cljs.core.LazySeq(null, !1, function() {
+      for(var d = c;;) {
+        var e = cljs.core.seq.call(null, d);
+        if(e) {
+          var f = e, g = cljs.core.first.call(null, f), e = function(b, c, d, e) {
+            return function p(f) {
+              return new cljs.core.LazySeq(null, !1, function(b, c, d, e) {
+                return function() {
+                  for(;;) {
+                    var b = cljs.core.seq.call(null, f);
+                    return b ? (b = cljs.core.first.call(null, b), cljs.core.cons.call(null, new cljsinvaders.game.Enemy(c, b), p.call(null, cljs.core.rest.call(null, f)))) : null
+                  }
+                }
+              }(b, c, d, e), null)
+            }
+          }(d, g, f, e);
+          if(e = cljs.core.seq.call(null, e.call(null, cljs.core.range.call(null, 0, 240, 60)))) {
+            return cljs.core.concat.call(null, e, b.call(null, cljs.core.rest.call(null, d)))
+          }
+          d = cljs.core.rest.call(null, d)
+        }else {
+          return null
+        }
+      }
+    }, null)
+  }.call(null, cljs.core.range.call(null, 0, 480, 60))
+};
+cljsinvaders.game.create_state = function() {
+  return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:entities", cljsinvaders.game.create_enemies.call(null)], !0)
+};
+cljsinvaders.game.context = function(a, b) {
+  var c = document.getElementById("target"), d = c.getContext("2d");
+  c.width = a;
+  c.height = b;
+  return d
+};
+cljsinvaders.game.clear_screen = function(a) {
+  a.fillStyle = "#000";
+  return a.fillRect(0, 0, cljsinvaders.game.canvas_width, cljsinvaders.game.canvas_height)
+};
+cljsinvaders.game.tick = function tick(b, c) {
+  var d = cljs.core.seq_QMARK_.call(null, c) ? cljs.core.apply.call(null, cljs.core.hash_map, c) : c, e = cljs.core._lookup.call(null, d, "\ufdd0:entities", null);
+  cljsinvaders.game.log.call(null, e);
+  cljsinvaders.game.clear_screen.call(null, b);
+  for(e = cljs.core.seq.call(null, e);;) {
+    if(e) {
+      var f = cljs.core.first.call(null, e);
+      cljsinvaders.game.render.call(null, f, b);
+      e = cljs.core.next.call(null, e)
+    }else {
+      break
+    }
+  }
   return setTimeout(function() {
-    return tick.call(null, b, cljs.core.ObjMap.EMPTY)
+    return tick.call(null, b, d)
   }, 1E3)
-}, init:function() {
-  var a = game.context.call(null, 640, 480);
-  return game.tick.call(null, a, cljs.core.ObjMap.EMPTY)
-}};
-goog.exportSymbol("game.init", game.init);
+};
+cljsinvaders.game.init = function() {
+  var a = cljsinvaders.game.context.call(null, cljsinvaders.game.canvas_width, cljsinvaders.game.canvas_height);
+  return cljsinvaders.game.tick.call(null, a, cljsinvaders.game.create_state.call(null))
+};
+goog.exportSymbol("cljsinvaders.game.init", cljsinvaders.game.init);
