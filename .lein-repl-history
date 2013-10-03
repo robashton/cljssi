@@ -1,1 +1,3 @@
 exit
+(in-ns cljsinvaders.game)
+exit

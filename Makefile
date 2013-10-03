@@ -2,7 +2,7 @@ default: build
 all: build
 
 build:
-	cljsc game.clj \
+	cljsc src/cljsinvaders/game.clj \
 			'{:optimizations :simple :pretty-print true}' \
 			> ./game.js
 
