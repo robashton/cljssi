@@ -27,8 +27,8 @@
 (defrecord Player [x y]
   Entity
   (tick [this] 
-    (cond (is-left-pressed) (update-in this [:x] (partial + 2))
-          (is-right-pressed) (update-in this [:x] (partial - 2)) 
+    (cond (is-left-pressed) (assoc this :x (- x 2))
+          (is-right-pressed) (assoc this :x (+ x 2)) 
           :else this))
   (render [this ctx]
     (set! (. ctx -fillStyle) "#00F")

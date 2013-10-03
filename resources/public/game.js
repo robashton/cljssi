@@ -22563,8 +22563,8 @@ cljsinvaders.game.log = function() {
     return log__delegate.call(this, v)
   };
   log.cljs$lang$maxFixedArity = 0;
-  log.cljs$lang$applyTo = function(arglist__7687) {
-    var v = cljs.core.seq(arglist__7687);
+  log.cljs$lang$applyTo = function(arglist__9063) {
+    var v = cljs.core.seq(arglist__9063);
     return log__delegate(v)
   };
   log.cljs$core$IFn$_invoke$arity$variadic = log__delegate;
@@ -22656,33 +22656,33 @@ cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$2 = function(t
   var self__ = this;
   return this__3329__auto__.cljs$core$ILookup$_lookup$arity$3(this__3329__auto__, k__3330__auto__, null)
 };
-cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k7689, else__3332__auto__) {
+cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k9065, else__3332__auto__) {
   var self__ = this;
-  if(k7689 === "\ufdd0:x") {
+  if(k9065 === "\ufdd0:x") {
     return self__.x
   }else {
-    if(k7689 === "\ufdd0:y") {
+    if(k9065 === "\ufdd0:y") {
       return self__.y
     }else {
       if("\ufdd0:else") {
-        return cljs.core.get.call(null, self__.__extmap, k7689, else__3332__auto__)
+        return cljs.core.get.call(null, self__.__extmap, k9065, else__3332__auto__)
       }else {
         return null
       }
     }
   }
 };
-cljsinvaders.game.Enemy.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__7688) {
+cljsinvaders.game.Enemy.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__9064) {
   var self__ = this;
-  var pred__7691 = cljs.core.identical_QMARK_;
-  var expr__7692 = k__3337__auto__;
-  if(pred__7691.call(null, "\ufdd0:x", expr__7692)) {
-    return new cljsinvaders.game.Enemy(G__7688, self__.y, self__.__meta, self__.__extmap, null)
+  var pred__9067 = cljs.core.identical_QMARK_;
+  var expr__9068 = k__3337__auto__;
+  if(pred__9067.call(null, "\ufdd0:x", expr__9068)) {
+    return new cljsinvaders.game.Enemy(G__9064, self__.y, self__.__meta, self__.__extmap, null)
   }else {
-    if(pred__7691.call(null, "\ufdd0:y", expr__7692)) {
-      return new cljsinvaders.game.Enemy(self__.x, G__7688, self__.__meta, self__.__extmap, null)
+    if(pred__9067.call(null, "\ufdd0:y", expr__9068)) {
+      return new cljsinvaders.game.Enemy(self__.x, G__9064, self__.__meta, self__.__extmap, null)
     }else {
-      return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__7688), null)
+      return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__9064), null)
     }
   }
 };
@@ -22729,9 +22729,9 @@ cljsinvaders.game.Enemy.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(thi
     return false
   }
 };
-cljsinvaders.game.Enemy.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__7688) {
+cljsinvaders.game.Enemy.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__9064) {
   var self__ = this;
-  return new cljsinvaders.game.Enemy(self__.x, self__.y, G__7688, self__.__extmap, self__.__hash)
+  return new cljsinvaders.game.Enemy(self__.x, self__.y, G__9064, self__.__extmap, self__.__hash)
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__3327__auto__) {
   var self__ = this;
@@ -22765,8 +22765,8 @@ cljsinvaders.game.Enemy.cljs$lang$ctorPrWriter = function(this__3363__auto__, wr
 cljsinvaders.game.__GT_Enemy = function __GT_Enemy(x, y) {
   return new cljsinvaders.game.Enemy(x, y)
 };
-cljsinvaders.game.map__GT_Enemy = function map__GT_Enemy(G__7690) {
-  return new cljsinvaders.game.Enemy((new cljs.core.Keyword("\ufdd0:x")).call(null, G__7690), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__7690), null, cljs.core.dissoc.call(null, G__7690, "\ufdd0:x", "\ufdd0:y"))
+cljsinvaders.game.map__GT_Enemy = function map__GT_Enemy(G__9066) {
+  return new cljsinvaders.game.Enemy((new cljs.core.Keyword("\ufdd0:x")).call(null, G__9066), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__9066), null, cljs.core.dissoc.call(null, G__9066, "\ufdd0:x", "\ufdd0:y"))
 };
 goog.provide("cljsinvaders.game.Player");
 cljsinvaders.game.Player = function(x, y, __meta, __extmap) {
@@ -22799,33 +22799,33 @@ cljsinvaders.game.Player.prototype.cljs$core$ILookup$_lookup$arity$2 = function(
   var self__ = this;
   return this__3329__auto__.cljs$core$ILookup$_lookup$arity$3(this__3329__auto__, k__3330__auto__, null)
 };
-cljsinvaders.game.Player.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k7695, else__3332__auto__) {
+cljsinvaders.game.Player.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k9071, else__3332__auto__) {
   var self__ = this;
-  if(k7695 === "\ufdd0:x") {
+  if(k9071 === "\ufdd0:x") {
     return self__.x
   }else {
-    if(k7695 === "\ufdd0:y") {
+    if(k9071 === "\ufdd0:y") {
       return self__.y
     }else {
       if("\ufdd0:else") {
-        return cljs.core.get.call(null, self__.__extmap, k7695, else__3332__auto__)
+        return cljs.core.get.call(null, self__.__extmap, k9071, else__3332__auto__)
       }else {
         return null
       }
     }
   }
 };
-cljsinvaders.game.Player.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__7694) {
+cljsinvaders.game.Player.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__9070) {
   var self__ = this;
-  var pred__7697 = cljs.core.identical_QMARK_;
-  var expr__7698 = k__3337__auto__;
-  if(pred__7697.call(null, "\ufdd0:x", expr__7698)) {
-    return new cljsinvaders.game.Player(G__7694, self__.y, self__.__meta, self__.__extmap, null)
+  var pred__9073 = cljs.core.identical_QMARK_;
+  var expr__9074 = k__3337__auto__;
+  if(pred__9073.call(null, "\ufdd0:x", expr__9074)) {
+    return new cljsinvaders.game.Player(G__9070, self__.y, self__.__meta, self__.__extmap, null)
   }else {
-    if(pred__7697.call(null, "\ufdd0:y", expr__7698)) {
-      return new cljsinvaders.game.Player(self__.x, G__7694, self__.__meta, self__.__extmap, null)
+    if(pred__9073.call(null, "\ufdd0:y", expr__9074)) {
+      return new cljsinvaders.game.Player(self__.x, G__9070, self__.__meta, self__.__extmap, null)
     }else {
-      return new cljsinvaders.game.Player(self__.x, self__.y, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__7694), null)
+      return new cljsinvaders.game.Player(self__.x, self__.y, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__9070), null)
     }
   }
 };
@@ -22872,9 +22872,9 @@ cljsinvaders.game.Player.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(th
     return false
   }
 };
-cljsinvaders.game.Player.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__7694) {
+cljsinvaders.game.Player.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__9070) {
   var self__ = this;
-  return new cljsinvaders.game.Player(self__.x, self__.y, G__7694, self__.__extmap, self__.__hash)
+  return new cljsinvaders.game.Player(self__.x, self__.y, G__9070, self__.__extmap, self__.__hash)
 };
 cljsinvaders.game.Player.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__3327__auto__) {
   var self__ = this;
@@ -22884,10 +22884,10 @@ cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$ = true;
 cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$tick$arity$1 = function(this$) {
   var self__ = this;
   if(cljs.core.truth_(cljsinvaders.game.is_left_pressed.call(null))) {
-    return cljs.core.update_in.call(null, this$, cljs.core.PersistentVector.fromArray(["\ufdd0:x"], true), cljs.core.partial.call(null, cljs.core._PLUS_, 2))
+    return cljs.core.assoc.call(null, this$, "\ufdd0:x", self__.x - 2)
   }else {
     if(cljs.core.truth_(cljsinvaders.game.is_right_pressed.call(null))) {
-      return cljs.core.update_in.call(null, this$, cljs.core.PersistentVector.fromArray(["\ufdd0:x"], true), cljs.core.partial.call(null, cljs.core._, 2))
+      return cljs.core.assoc.call(null, this$, "\ufdd0:x", self__.x + 2)
     }else {
       if("\ufdd0:else") {
         return this$
@@ -22920,39 +22920,39 @@ cljsinvaders.game.Player.cljs$lang$ctorPrWriter = function(this__3363__auto__, w
 cljsinvaders.game.__GT_Player = function __GT_Player(x, y) {
   return new cljsinvaders.game.Player(x, y)
 };
-cljsinvaders.game.map__GT_Player = function map__GT_Player(G__7696) {
-  return new cljsinvaders.game.Player((new cljs.core.Keyword("\ufdd0:x")).call(null, G__7696), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__7696), null, cljs.core.dissoc.call(null, G__7696, "\ufdd0:x", "\ufdd0:y"))
+cljsinvaders.game.map__GT_Player = function map__GT_Player(G__9072) {
+  return new cljsinvaders.game.Player((new cljs.core.Keyword("\ufdd0:x")).call(null, G__9072), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__9072), null, cljs.core.dissoc.call(null, G__9072, "\ufdd0:x", "\ufdd0:y"))
 };
 cljsinvaders.game.create_enemies = function create_enemies() {
-  var iter__3470__auto__ = function iter__7706(s__7707) {
+  var iter__3470__auto__ = function iter__9082(s__9083) {
     return new cljs.core.LazySeq(null, false, function() {
-      var s__7707__$1 = s__7707;
+      var s__9083__$1 = s__9083;
       while(true) {
-        var temp__4092__auto__ = cljs.core.seq.call(null, s__7707__$1);
+        var temp__4092__auto__ = cljs.core.seq.call(null, s__9083__$1);
         if(temp__4092__auto__) {
           var xs__4579__auto__ = temp__4092__auto__;
           var x = cljs.core.first.call(null, xs__4579__auto__);
-          var iterys__3466__auto__ = function(s__7707__$1, x, xs__4579__auto__, temp__4092__auto__) {
-            return function iter__7708(s__7709) {
-              return new cljs.core.LazySeq(null, false, function(s__7707__$1, x, xs__4579__auto__, temp__4092__auto__) {
+          var iterys__3466__auto__ = function(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__) {
+            return function iter__9084(s__9085) {
+              return new cljs.core.LazySeq(null, false, function(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__) {
                 return function() {
-                  var s__7709__$1 = s__7709;
+                  var s__9085__$1 = s__9085;
                   while(true) {
-                    var temp__4092__auto____$1 = cljs.core.seq.call(null, s__7709__$1);
+                    var temp__4092__auto____$1 = cljs.core.seq.call(null, s__9085__$1);
                     if(temp__4092__auto____$1) {
-                      var s__7709__$2 = temp__4092__auto____$1;
-                      if(cljs.core.chunked_seq_QMARK_.call(null, s__7709__$2)) {
-                        var c__3468__auto__ = cljs.core.chunk_first.call(null, s__7709__$2);
+                      var s__9085__$2 = temp__4092__auto____$1;
+                      if(cljs.core.chunked_seq_QMARK_.call(null, s__9085__$2)) {
+                        var c__3468__auto__ = cljs.core.chunk_first.call(null, s__9085__$2);
                         var size__3469__auto__ = cljs.core.count.call(null, c__3468__auto__);
-                        var b__7711 = cljs.core.chunk_buffer.call(null, size__3469__auto__);
+                        var b__9087 = cljs.core.chunk_buffer.call(null, size__3469__auto__);
                         if(function() {
-                          var i__7710 = 0;
+                          var i__9086 = 0;
                           while(true) {
-                            if(i__7710 < size__3469__auto__) {
-                              var y = cljs.core._nth.call(null, c__3468__auto__, i__7710);
-                              cljs.core.chunk_append.call(null, b__7711, new cljsinvaders.game.Enemy(x, y));
-                              var G__7712 = i__7710 + 1;
-                              i__7710 = G__7712;
+                            if(i__9086 < size__3469__auto__) {
+                              var y = cljs.core._nth.call(null, c__3468__auto__, i__9086);
+                              cljs.core.chunk_append.call(null, b__9087, new cljsinvaders.game.Enemy(x, y));
+                              var G__9088 = i__9086 + 1;
+                              i__9086 = G__9088;
                               continue
                             }else {
                               return true
@@ -22960,13 +22960,13 @@ cljsinvaders.game.create_enemies = function create_enemies() {
                             break
                           }
                         }()) {
-                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__7711), iter__7708.call(null, cljs.core.chunk_rest.call(null, s__7709__$2)))
+                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__9087), iter__9084.call(null, cljs.core.chunk_rest.call(null, s__9085__$2)))
                         }else {
-                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__7711), null)
+                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__9087), null)
                         }
                       }else {
-                        var y = cljs.core.first.call(null, s__7709__$2);
-                        return cljs.core.cons.call(null, new cljsinvaders.game.Enemy(x, y), iter__7708.call(null, cljs.core.rest.call(null, s__7709__$2)))
+                        var y = cljs.core.first.call(null, s__9085__$2);
+                        return cljs.core.cons.call(null, new cljsinvaders.game.Enemy(x, y), iter__9084.call(null, cljs.core.rest.call(null, s__9085__$2)))
                       }
                     }else {
                       return null
@@ -22974,15 +22974,15 @@ cljsinvaders.game.create_enemies = function create_enemies() {
                     break
                   }
                 }
-              }(s__7707__$1, x, xs__4579__auto__, temp__4092__auto__), null)
+              }(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__), null)
             }
-          }(s__7707__$1, x, xs__4579__auto__, temp__4092__auto__);
+          }(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__);
           var fs__3467__auto__ = cljs.core.seq.call(null, iterys__3466__auto__.call(null, cljs.core.range.call(null, 0, 240, 60)));
           if(fs__3467__auto__) {
-            return cljs.core.concat.call(null, fs__3467__auto__, iter__7706.call(null, cljs.core.rest.call(null, s__7707__$1)))
+            return cljs.core.concat.call(null, fs__3467__auto__, iter__9082.call(null, cljs.core.rest.call(null, s__9083__$1)))
           }else {
-            var G__7713 = cljs.core.rest.call(null, s__7707__$1);
-            s__7707__$1 = G__7713;
+            var G__9089 = cljs.core.rest.call(null, s__9083__$1);
+            s__9083__$1 = G__9089;
             continue
           }
         }else {
@@ -23007,66 +23007,66 @@ cljsinvaders.game.context = function context(width, height) {
   target.height = height;
   return context__$1
 };
-cljsinvaders.game.get_next_state = function get_next_state(p__7714) {
-  var map__7716 = p__7714;
-  var map__7716__$1 = cljs.core.seq_QMARK_.call(null, map__7716) ? cljs.core.apply.call(null, cljs.core.hash_map, map__7716) : map__7716;
-  var state = map__7716__$1;
-  var entities = cljs.core.get.call(null, map__7716__$1, "\ufdd0:entities");
+cljsinvaders.game.get_next_state = function get_next_state(p__9090) {
+  var map__9092 = p__9090;
+  var map__9092__$1 = cljs.core.seq_QMARK_.call(null, map__9092) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9092) : map__9092;
+  var state = map__9092__$1;
+  var entities = cljs.core.get.call(null, map__9092__$1, "\ufdd0:entities");
   return cljs.core.assoc.call(null, state, "\ufdd0:entities", cljs.core.map.call(null, cljsinvaders.game.tick, entities))
 };
 cljsinvaders.game.clear_screen = function clear_screen(ctx) {
   ctx.fillStyle = "#000";
   return ctx.fillRect(0, 0, cljsinvaders.game.canvas_width, cljsinvaders.game.canvas_height)
 };
-cljsinvaders.game.game_tick = function game_tick(ctx, p__7717) {
-  var map__7723 = p__7717;
-  var map__7723__$1 = cljs.core.seq_QMARK_.call(null, map__7723) ? cljs.core.apply.call(null, cljs.core.hash_map, map__7723) : map__7723;
-  var state = map__7723__$1;
-  var entities = cljs.core.get.call(null, map__7723__$1, "\ufdd0:entities");
+cljsinvaders.game.game_tick = function game_tick(ctx, p__9093) {
+  var map__9099 = p__9093;
+  var map__9099__$1 = cljs.core.seq_QMARK_.call(null, map__9099) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9099) : map__9099;
+  var state = map__9099__$1;
+  var entities = cljs.core.get.call(null, map__9099__$1, "\ufdd0:entities");
   cljsinvaders.game.clear_screen.call(null, ctx);
-  var seq__7724_7728 = cljs.core.seq.call(null, entities);
-  var chunk__7725_7729 = null;
-  var count__7726_7730 = 0;
-  var i__7727_7731 = 0;
+  var seq__9100_9104 = cljs.core.seq.call(null, entities);
+  var chunk__9101_9105 = null;
+  var count__9102_9106 = 0;
+  var i__9103_9107 = 0;
   while(true) {
-    if(i__7727_7731 < count__7726_7730) {
-      var e_7732 = cljs.core._nth.call(null, chunk__7725_7729, i__7727_7731);
-      cljsinvaders.game.render.call(null, e_7732, ctx);
-      var G__7733 = seq__7724_7728;
-      var G__7734 = chunk__7725_7729;
-      var G__7735 = count__7726_7730;
-      var G__7736 = i__7727_7731 + 1;
-      seq__7724_7728 = G__7733;
-      chunk__7725_7729 = G__7734;
-      count__7726_7730 = G__7735;
-      i__7727_7731 = G__7736;
+    if(i__9103_9107 < count__9102_9106) {
+      var e_9108 = cljs.core._nth.call(null, chunk__9101_9105, i__9103_9107);
+      cljsinvaders.game.render.call(null, e_9108, ctx);
+      var G__9109 = seq__9100_9104;
+      var G__9110 = chunk__9101_9105;
+      var G__9111 = count__9102_9106;
+      var G__9112 = i__9103_9107 + 1;
+      seq__9100_9104 = G__9109;
+      chunk__9101_9105 = G__9110;
+      count__9102_9106 = G__9111;
+      i__9103_9107 = G__9112;
       continue
     }else {
-      var temp__4092__auto___7737 = cljs.core.seq.call(null, seq__7724_7728);
-      if(temp__4092__auto___7737) {
-        var seq__7724_7738__$1 = temp__4092__auto___7737;
-        if(cljs.core.chunked_seq_QMARK_.call(null, seq__7724_7738__$1)) {
-          var c__3501__auto___7739 = cljs.core.chunk_first.call(null, seq__7724_7738__$1);
-          var G__7740 = cljs.core.chunk_rest.call(null, seq__7724_7738__$1);
-          var G__7741 = c__3501__auto___7739;
-          var G__7742 = cljs.core.count.call(null, c__3501__auto___7739);
-          var G__7743 = 0;
-          seq__7724_7728 = G__7740;
-          chunk__7725_7729 = G__7741;
-          count__7726_7730 = G__7742;
-          i__7727_7731 = G__7743;
+      var temp__4092__auto___9113 = cljs.core.seq.call(null, seq__9100_9104);
+      if(temp__4092__auto___9113) {
+        var seq__9100_9114__$1 = temp__4092__auto___9113;
+        if(cljs.core.chunked_seq_QMARK_.call(null, seq__9100_9114__$1)) {
+          var c__3501__auto___9115 = cljs.core.chunk_first.call(null, seq__9100_9114__$1);
+          var G__9116 = cljs.core.chunk_rest.call(null, seq__9100_9114__$1);
+          var G__9117 = c__3501__auto___9115;
+          var G__9118 = cljs.core.count.call(null, c__3501__auto___9115);
+          var G__9119 = 0;
+          seq__9100_9104 = G__9116;
+          chunk__9101_9105 = G__9117;
+          count__9102_9106 = G__9118;
+          i__9103_9107 = G__9119;
           continue
         }else {
-          var e_7744 = cljs.core.first.call(null, seq__7724_7738__$1);
-          cljsinvaders.game.render.call(null, e_7744, ctx);
-          var G__7745 = cljs.core.next.call(null, seq__7724_7738__$1);
-          var G__7746 = null;
-          var G__7747 = 0;
-          var G__7748 = 0;
-          seq__7724_7728 = G__7745;
-          chunk__7725_7729 = G__7746;
-          count__7726_7730 = G__7747;
-          i__7727_7731 = G__7748;
+          var e_9120 = cljs.core.first.call(null, seq__9100_9114__$1);
+          cljsinvaders.game.render.call(null, e_9120, ctx);
+          var G__9121 = cljs.core.next.call(null, seq__9100_9114__$1);
+          var G__9122 = null;
+          var G__9123 = 0;
+          var G__9124 = 0;
+          seq__9100_9104 = G__9121;
+          chunk__9101_9105 = G__9122;
+          count__9102_9106 = G__9123;
+          i__9103_9107 = G__9124;
           continue
         }
       }else {
