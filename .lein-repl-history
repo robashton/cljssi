@@ -14,3 +14,7 @@ exit
       (apply-event :enemy-direction-changed state) state)))
 (doc map)
 (doc partial)
+(doc conj)
+(doseq [x { :one "one" :two "two"}] (println x))
+(doc first)
+(doc find)

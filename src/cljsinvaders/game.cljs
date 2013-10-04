@@ -6,6 +6,7 @@
 
 (defn is-left-pressed [] (@key-states 37))
 (defn is-right-pressed [] (@key-states 39))
+(defn is-fire-pressed [] (@key-states 32))
 
 (defn log [& v]
   (.log js/console v))
@@ -15,6 +16,9 @@
 
 (defn move-right [rect amount]
   (assoc rect :x (+ (:x rect) amount)))
+
+(defn move-up [rect amount]
+  (assoc rect :y (- (:- rect) amount)))
 
 (defn draw-rect [ctx x y w h colour]
   (set! (. ctx -fillStyle) colour) 
@@ -58,6 +62,12 @@
   (handle-event [this event] this)
   (render [this ctx] (draw-rect ctx x y w h "#FF0")))
 
+(defrecord Bullet [x y w h]
+  Entity
+  (tick [this] (move-up this 2))
+  (handle-event [this event] this)
+  (render [this ctx] (draw-rect ctx x y w h "#F00")))
+
 (defn create-enemies []
   (for [x (range 0 480 60)
         y (range 0 240 60)]
@@ -66,28 +76,45 @@
 (defn create-player []
   (Player. 200 430 20 20))
 
+(defn create-bullet [player]
+  (Bullet. (:x player) (:y player) 5 5))
+
 (defn create-state [] 
   {
+   :last-firing-ticks 0
    :entities (cons 
                (create-player) 
-               (create-enemies)) })
+               (create-enemies)) 
+   })
 
-(defn filter-for-enemies [entities] (filter (partial instance? Enemy) entities ) )
+(defn get-enemies [entities] (filter (partial instance? Enemy) entities ))
+(defn get-player [entities] (first (filter (partial instance? Player) entities )))
 
 (defn apply-event [event {:keys [entities] :as state}]
   (assoc state :entities (map #(handle-event %1 event) entities)))
 
 (defn check-enemy-direction [{:keys [entities] :as state}]
-  (let [enemies (filter-for-enemies entities)
+  (let [enemies (get-enemies entities)
         min-left (apply min (map rect-left enemies))
         max-right (apply max (map rect-right enemies)) ]
     (if (or (< 640 max-right) (> 0 min-left))
       (apply-event :enemy-direction-changed state) state)))
 
+(defn can-fire [state]
+  (= (:last-firing-ticks state) 0))
+
+(defn try-firing [{:keys [entities last-firing-ticks] :as state}]
+  (if (and (is-fire-pressed) (= last-firing-ticks 0))
+    (assoc state :entities (conj entities (create-bullet (get-player entities)))
+                 :last-firing-ticks 1) 
+    state))
+
+
 (defn get-next-state [state]
   (-> state
     (update-in [:entities] (partial map tick))  
-    (check-enemy-direction)))
+    (check-enemy-direction)
+    (try-firing)))
 
 (defn game-tick [ctx {:keys [entities] :as state}]
   (clear-screen ctx) 
