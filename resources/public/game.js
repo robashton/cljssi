@@ -499,19 +499,6 @@ goog.base = function(me, opt_methodName, var_args) {
 goog.scope = function(fn) {
   fn.call(goog.global)
 };
-goog.provide("goog.debug.Error");
-goog.debug.Error = function(opt_msg) {
-  if(Error.captureStackTrace) {
-    Error.captureStackTrace(this, goog.debug.Error)
-  }else {
-    this.stack = (new Error).stack || ""
-  }
-  if(opt_msg) {
-    this.message = String(opt_msg)
-  }
-};
-goog.inherits(goog.debug.Error, Error);
-goog.debug.Error.prototype.name = "CustomError";
 goog.provide("goog.string");
 goog.provide("goog.string.Unicode");
 goog.string.Unicode = {NBSP:"\u00a0"};
@@ -952,6 +939,19 @@ goog.string.parseInt = function(value) {
   }
   return NaN
 };
+goog.provide("goog.debug.Error");
+goog.debug.Error = function(opt_msg) {
+  if(Error.captureStackTrace) {
+    Error.captureStackTrace(this, goog.debug.Error)
+  }else {
+    this.stack = (new Error).stack || ""
+  }
+  if(opt_msg) {
+    this.message = String(opt_msg)
+  }
+};
+goog.inherits(goog.debug.Error, Error);
+goog.debug.Error.prototype.name = "CustomError";
 goog.provide("goog.asserts");
 goog.provide("goog.asserts.AssertionError");
 goog.require("goog.debug.Error");
@@ -22563,13 +22563,40 @@ cljsinvaders.game.log = function() {
     return log__delegate.call(this, v)
   };
   log.cljs$lang$maxFixedArity = 0;
-  log.cljs$lang$applyTo = function(arglist__9063) {
-    var v = cljs.core.seq(arglist__9063);
+  log.cljs$lang$applyTo = function(arglist__26338) {
+    var v = cljs.core.seq(arglist__26338);
     return log__delegate(v)
   };
   log.cljs$core$IFn$_invoke$arity$variadic = log__delegate;
   return log
 }();
+cljsinvaders.game.move_left = function move_left(rect, amount) {
+  return cljs.core.assoc.call(null, rect, "\ufdd0:x", (new cljs.core.Keyword("\ufdd0:x")).call(null, rect) - amount)
+};
+cljsinvaders.game.move_right = function move_right(rect, amount) {
+  return cljs.core.assoc.call(null, rect, "\ufdd0:x", (new cljs.core.Keyword("\ufdd0:x")).call(null, rect) + amount)
+};
+cljsinvaders.game.draw_rect = function draw_rect(ctx, x, y, w, h, colour) {
+  ctx.fillStyle = colour;
+  return ctx.fillRect(x, y, w, h)
+};
+cljsinvaders.game.rect_left = function rect_left(r) {
+  return(new cljs.core.Keyword("\ufdd0:x")).call(null, r)
+};
+cljsinvaders.game.rect_right = function rect_right(r) {
+  return(new cljs.core.Keyword("\ufdd0:w")).call(null, r) + (new cljs.core.Keyword("\ufdd0:x")).call(null, r)
+};
+cljsinvaders.game.context = function context(width, height) {
+  var target = document.getElementById("target");
+  var context__$1 = target.getContext("2d");
+  target.width = width;
+  target.height = height;
+  return context__$1
+};
+cljsinvaders.game.clear_screen = function clear_screen(ctx) {
+  ctx.fillStyle = "#000";
+  return ctx.fillRect(0, 0, cljsinvaders.game.canvas_width, cljsinvaders.game.canvas_height)
+};
 cljsinvaders.game.Entity = {};
 cljsinvaders.game.tick = function tick(this$) {
   if(function() {
@@ -22596,6 +22623,33 @@ cljsinvaders.game.tick = function tick(this$) {
         }
       }
     }().call(null, this$)
+  }
+};
+cljsinvaders.game.handle_event = function handle_event(this$, event) {
+  if(function() {
+    var and__3941__auto__ = this$;
+    if(and__3941__auto__) {
+      return this$.cljsinvaders$game$Entity$handle_event$arity$2
+    }else {
+      return and__3941__auto__
+    }
+  }()) {
+    return this$.cljsinvaders$game$Entity$handle_event$arity$2(this$, event)
+  }else {
+    var x__3370__auto__ = this$ == null ? null : this$;
+    return function() {
+      var or__3943__auto__ = cljsinvaders.game.handle_event[goog.typeOf(x__3370__auto__)];
+      if(or__3943__auto__) {
+        return or__3943__auto__
+      }else {
+        var or__3943__auto____$1 = cljsinvaders.game.handle_event["_"];
+        if(or__3943__auto____$1) {
+          return or__3943__auto____$1
+        }else {
+          throw cljs.core.missing_protocol.call(null, "Entity.handle-event", this$);
+        }
+      }
+    }().call(null, this$, event)
   }
 };
 cljsinvaders.game.render = function render(this$, ctx) {
@@ -22626,14 +22680,17 @@ cljsinvaders.game.render = function render(this$, ctx) {
   }
 };
 goog.provide("cljsinvaders.game.Enemy");
-cljsinvaders.game.Enemy = function(x, y, __meta, __extmap) {
+cljsinvaders.game.Enemy = function(x, y, w, h, direction, __meta, __extmap) {
   this.x = x;
   this.y = y;
+  this.w = w;
+  this.h = h;
+  this.direction = direction;
   this.__meta = __meta;
   this.__extmap = __extmap;
   this.cljs$lang$protocol_mask$partition1$ = 0;
   this.cljs$lang$protocol_mask$partition0$ = 2229667594;
-  if(arguments.length > 2) {
+  if(arguments.length > 5) {
     this.__meta = __meta;
     this.__extmap = __extmap
   }else {
@@ -22656,33 +22713,57 @@ cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$2 = function(t
   var self__ = this;
   return this__3329__auto__.cljs$core$ILookup$_lookup$arity$3(this__3329__auto__, k__3330__auto__, null)
 };
-cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k9065, else__3332__auto__) {
+cljsinvaders.game.Enemy.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k26340, else__3332__auto__) {
   var self__ = this;
-  if(k9065 === "\ufdd0:x") {
+  if(k26340 === "\ufdd0:x") {
     return self__.x
   }else {
-    if(k9065 === "\ufdd0:y") {
+    if(k26340 === "\ufdd0:y") {
       return self__.y
     }else {
-      if("\ufdd0:else") {
-        return cljs.core.get.call(null, self__.__extmap, k9065, else__3332__auto__)
+      if(k26340 === "\ufdd0:w") {
+        return self__.w
       }else {
-        return null
+        if(k26340 === "\ufdd0:h") {
+          return self__.h
+        }else {
+          if(k26340 === "\ufdd0:direction") {
+            return self__.direction
+          }else {
+            if("\ufdd0:else") {
+              return cljs.core.get.call(null, self__.__extmap, k26340, else__3332__auto__)
+            }else {
+              return null
+            }
+          }
+        }
       }
     }
   }
 };
-cljsinvaders.game.Enemy.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__9064) {
+cljsinvaders.game.Enemy.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__26339) {
   var self__ = this;
-  var pred__9067 = cljs.core.identical_QMARK_;
-  var expr__9068 = k__3337__auto__;
-  if(pred__9067.call(null, "\ufdd0:x", expr__9068)) {
-    return new cljsinvaders.game.Enemy(G__9064, self__.y, self__.__meta, self__.__extmap, null)
+  var pred__26342 = cljs.core.identical_QMARK_;
+  var expr__26343 = k__3337__auto__;
+  if(pred__26342.call(null, "\ufdd0:x", expr__26343)) {
+    return new cljsinvaders.game.Enemy(G__26339, self__.y, self__.w, self__.h, self__.direction, self__.__meta, self__.__extmap, null)
   }else {
-    if(pred__9067.call(null, "\ufdd0:y", expr__9068)) {
-      return new cljsinvaders.game.Enemy(self__.x, G__9064, self__.__meta, self__.__extmap, null)
+    if(pred__26342.call(null, "\ufdd0:y", expr__26343)) {
+      return new cljsinvaders.game.Enemy(self__.x, G__26339, self__.w, self__.h, self__.direction, self__.__meta, self__.__extmap, null)
     }else {
-      return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__9064), null)
+      if(pred__26342.call(null, "\ufdd0:w", expr__26343)) {
+        return new cljsinvaders.game.Enemy(self__.x, self__.y, G__26339, self__.h, self__.direction, self__.__meta, self__.__extmap, null)
+      }else {
+        if(pred__26342.call(null, "\ufdd0:h", expr__26343)) {
+          return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.w, G__26339, self__.direction, self__.__meta, self__.__extmap, null)
+        }else {
+          if(pred__26342.call(null, "\ufdd0:direction", expr__26343)) {
+            return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.w, self__.h, G__26339, self__.__meta, self__.__extmap, null)
+          }else {
+            return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.w, self__.h, self__.direction, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__26339), null)
+          }
+        }
+      }
     }
   }
 };
@@ -22691,7 +22772,8 @@ cljsinvaders.game.Enemy.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3 
   var pr_pair__3346__auto__ = function(keyval__3347__auto__) {
     return cljs.core.pr_sequential_writer.call(null, writer__3344__auto__, cljs.core.pr_writer, "", " ", "", opts__3345__auto__, keyval__3347__auto__)
   };
-  return cljs.core.pr_sequential_writer.call(null, writer__3344__auto__, pr_pair__3346__auto__, "#cljsinvaders.game.Enemy{", ", ", "}", opts__3345__auto__, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y)], true), self__.__extmap))
+  return cljs.core.pr_sequential_writer.call(null, writer__3344__auto__, pr_pair__3346__auto__, "#cljsinvaders.game.Enemy{", ", ", "}", opts__3345__auto__, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y), cljs.core.vector.call(null, "\ufdd0:w", self__.w), cljs.core.vector.call(null, "\ufdd0:h", self__.h), cljs.core.vector.call(null, "\ufdd0:direction", self__.direction)], true), 
+  self__.__extmap))
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$ICollection$_conj$arity$2 = function(this__3334__auto__, entry__3335__auto__) {
   var self__ = this;
@@ -22703,11 +22785,11 @@ cljsinvaders.game.Enemy.prototype.cljs$core$ICollection$_conj$arity$2 = function
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$ISeqable$_seq$arity$1 = function(this__3341__auto__) {
   var self__ = this;
-  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y)], true), self__.__extmap))
+  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y), cljs.core.vector.call(null, "\ufdd0:w", self__.w), cljs.core.vector.call(null, "\ufdd0:h", self__.h), cljs.core.vector.call(null, "\ufdd0:direction", self__.direction)], true), self__.__extmap))
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$ICounted$_count$arity$1 = function(this__3333__auto__) {
   var self__ = this;
-  return 2 + cljs.core.count.call(null, self__.__extmap)
+  return 5 + cljs.core.count.call(null, self__.__extmap)
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(this__3325__auto__, other__3326__auto__) {
   var self__ = this;
@@ -22729,9 +22811,9 @@ cljsinvaders.game.Enemy.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(thi
     return false
   }
 };
-cljsinvaders.game.Enemy.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__9064) {
+cljsinvaders.game.Enemy.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__26339) {
   var self__ = this;
-  return new cljsinvaders.game.Enemy(self__.x, self__.y, G__9064, self__.__extmap, self__.__hash)
+  return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.w, self__.h, self__.direction, G__26339, self__.__extmap, self__.__hash)
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__3327__auto__) {
   var self__ = this;
@@ -22740,19 +22822,35 @@ cljsinvaders.game.Enemy.prototype.cljs$core$IMeta$_meta$arity$1 = function(this_
 cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$ = true;
 cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$tick$arity$1 = function(this$) {
   var self__ = this;
-  return cljs.core.assoc.call(null, this$, "\ufdd0:x", self__.x + 1)
+  return cljsinvaders.game.move_right.call(null, this$, self__.direction)
+};
+cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$handle_event$arity$2 = function(this$, event) {
+  var self__ = this;
+  var G__26345 = event;
+  if(cljs.core._EQ_.call(null, "\ufdd0:else", G__26345)) {
+    return this$
+  }else {
+    if(cljs.core._EQ_.call(null, "\ufdd0:enemy-direction-changed", G__26345)) {
+      return cljs.core.assoc.call(null, this$, "\ufdd0:direction", 0 - self__.direction, "\ufdd0:y", 10 + self__.y)
+    }else {
+      if("\ufdd0:else") {
+        throw new Error([cljs.core.str("No matching clause: "), cljs.core.str(event)].join(""));
+      }else {
+        return null
+      }
+    }
+  }
 };
 cljsinvaders.game.Enemy.prototype.cljsinvaders$game$Entity$render$arity$2 = function(this$, ctx) {
   var self__ = this;
-  ctx.fillStyle = "#FF0";
-  return ctx.fillRect(self__.x, self__.y, 20, 20)
+  return cljsinvaders.game.draw_rect.call(null, ctx, self__.x, self__.y, self__.w, self__.h, "#00F")
 };
 cljsinvaders.game.Enemy.prototype.cljs$core$IMap$_dissoc$arity$2 = function(this__3338__auto__, k__3339__auto__) {
   var self__ = this;
-  if(cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.fromArray(["\ufdd0:y", null, "\ufdd0:x", null], true), k__3339__auto__)) {
+  if(cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.fromArray(["\ufdd0:direction", null, "\ufdd0:y", null, "\ufdd0:x", null, "\ufdd0:h", null, "\ufdd0:w", null], true), k__3339__auto__)) {
     return cljs.core.dissoc.call(null, cljs.core.with_meta.call(null, cljs.core.into.call(null, cljs.core.PersistentArrayMap.EMPTY, this__3338__auto__), self__.__meta), k__3339__auto__)
   }else {
-    return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, self__.__extmap, k__3339__auto__)), null)
+    return new cljsinvaders.game.Enemy(self__.x, self__.y, self__.w, self__.h, self__.direction, self__.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, self__.__extmap, k__3339__auto__)), null)
   }
 };
 cljsinvaders.game.Enemy.cljs$lang$type = true;
@@ -22762,21 +22860,23 @@ cljsinvaders.game.Enemy.cljs$lang$ctorPrSeq = function(this__3363__auto__) {
 cljsinvaders.game.Enemy.cljs$lang$ctorPrWriter = function(this__3363__auto__, writer__3364__auto__) {
   return cljs.core._write.call(null, writer__3364__auto__, "cljsinvaders.game/Enemy")
 };
-cljsinvaders.game.__GT_Enemy = function __GT_Enemy(x, y) {
-  return new cljsinvaders.game.Enemy(x, y)
+cljsinvaders.game.__GT_Enemy = function __GT_Enemy(x, y, w, h, direction) {
+  return new cljsinvaders.game.Enemy(x, y, w, h, direction)
 };
-cljsinvaders.game.map__GT_Enemy = function map__GT_Enemy(G__9066) {
-  return new cljsinvaders.game.Enemy((new cljs.core.Keyword("\ufdd0:x")).call(null, G__9066), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__9066), null, cljs.core.dissoc.call(null, G__9066, "\ufdd0:x", "\ufdd0:y"))
+cljsinvaders.game.map__GT_Enemy = function map__GT_Enemy(G__26341) {
+  return new cljsinvaders.game.Enemy((new cljs.core.Keyword("\ufdd0:x")).call(null, G__26341), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__26341), (new cljs.core.Keyword("\ufdd0:w")).call(null, G__26341), (new cljs.core.Keyword("\ufdd0:h")).call(null, G__26341), (new cljs.core.Keyword("\ufdd0:direction")).call(null, G__26341), null, cljs.core.dissoc.call(null, G__26341, "\ufdd0:x", "\ufdd0:y", "\ufdd0:w", "\ufdd0:h", "\ufdd0:direction"))
 };
 goog.provide("cljsinvaders.game.Player");
-cljsinvaders.game.Player = function(x, y, __meta, __extmap) {
+cljsinvaders.game.Player = function(x, y, w, h, __meta, __extmap) {
   this.x = x;
   this.y = y;
+  this.w = w;
+  this.h = h;
   this.__meta = __meta;
   this.__extmap = __extmap;
   this.cljs$lang$protocol_mask$partition1$ = 0;
   this.cljs$lang$protocol_mask$partition0$ = 2229667594;
-  if(arguments.length > 2) {
+  if(arguments.length > 4) {
     this.__meta = __meta;
     this.__extmap = __extmap
   }else {
@@ -22799,33 +22899,49 @@ cljsinvaders.game.Player.prototype.cljs$core$ILookup$_lookup$arity$2 = function(
   var self__ = this;
   return this__3329__auto__.cljs$core$ILookup$_lookup$arity$3(this__3329__auto__, k__3330__auto__, null)
 };
-cljsinvaders.game.Player.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k9071, else__3332__auto__) {
+cljsinvaders.game.Player.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__3331__auto__, k26347, else__3332__auto__) {
   var self__ = this;
-  if(k9071 === "\ufdd0:x") {
+  if(k26347 === "\ufdd0:x") {
     return self__.x
   }else {
-    if(k9071 === "\ufdd0:y") {
+    if(k26347 === "\ufdd0:y") {
       return self__.y
     }else {
-      if("\ufdd0:else") {
-        return cljs.core.get.call(null, self__.__extmap, k9071, else__3332__auto__)
+      if(k26347 === "\ufdd0:w") {
+        return self__.w
       }else {
-        return null
+        if(k26347 === "\ufdd0:h") {
+          return self__.h
+        }else {
+          if("\ufdd0:else") {
+            return cljs.core.get.call(null, self__.__extmap, k26347, else__3332__auto__)
+          }else {
+            return null
+          }
+        }
       }
     }
   }
 };
-cljsinvaders.game.Player.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__9070) {
+cljsinvaders.game.Player.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__3336__auto__, k__3337__auto__, G__26346) {
   var self__ = this;
-  var pred__9073 = cljs.core.identical_QMARK_;
-  var expr__9074 = k__3337__auto__;
-  if(pred__9073.call(null, "\ufdd0:x", expr__9074)) {
-    return new cljsinvaders.game.Player(G__9070, self__.y, self__.__meta, self__.__extmap, null)
+  var pred__26349 = cljs.core.identical_QMARK_;
+  var expr__26350 = k__3337__auto__;
+  if(pred__26349.call(null, "\ufdd0:x", expr__26350)) {
+    return new cljsinvaders.game.Player(G__26346, self__.y, self__.w, self__.h, self__.__meta, self__.__extmap, null)
   }else {
-    if(pred__9073.call(null, "\ufdd0:y", expr__9074)) {
-      return new cljsinvaders.game.Player(self__.x, G__9070, self__.__meta, self__.__extmap, null)
+    if(pred__26349.call(null, "\ufdd0:y", expr__26350)) {
+      return new cljsinvaders.game.Player(self__.x, G__26346, self__.w, self__.h, self__.__meta, self__.__extmap, null)
     }else {
-      return new cljsinvaders.game.Player(self__.x, self__.y, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__9070), null)
+      if(pred__26349.call(null, "\ufdd0:w", expr__26350)) {
+        return new cljsinvaders.game.Player(self__.x, self__.y, G__26346, self__.h, self__.__meta, self__.__extmap, null)
+      }else {
+        if(pred__26349.call(null, "\ufdd0:h", expr__26350)) {
+          return new cljsinvaders.game.Player(self__.x, self__.y, self__.w, G__26346, self__.__meta, self__.__extmap, null)
+        }else {
+          return new cljsinvaders.game.Player(self__.x, self__.y, self__.w, self__.h, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__3337__auto__, G__26346), null)
+        }
+      }
     }
   }
 };
@@ -22834,7 +22950,7 @@ cljsinvaders.game.Player.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3
   var pr_pair__3346__auto__ = function(keyval__3347__auto__) {
     return cljs.core.pr_sequential_writer.call(null, writer__3344__auto__, cljs.core.pr_writer, "", " ", "", opts__3345__auto__, keyval__3347__auto__)
   };
-  return cljs.core.pr_sequential_writer.call(null, writer__3344__auto__, pr_pair__3346__auto__, "#cljsinvaders.game.Player{", ", ", "}", opts__3345__auto__, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y)], true), self__.__extmap))
+  return cljs.core.pr_sequential_writer.call(null, writer__3344__auto__, pr_pair__3346__auto__, "#cljsinvaders.game.Player{", ", ", "}", opts__3345__auto__, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y), cljs.core.vector.call(null, "\ufdd0:w", self__.w), cljs.core.vector.call(null, "\ufdd0:h", self__.h)], true), self__.__extmap))
 };
 cljsinvaders.game.Player.prototype.cljs$core$ICollection$_conj$arity$2 = function(this__3334__auto__, entry__3335__auto__) {
   var self__ = this;
@@ -22846,11 +22962,11 @@ cljsinvaders.game.Player.prototype.cljs$core$ICollection$_conj$arity$2 = functio
 };
 cljsinvaders.game.Player.prototype.cljs$core$ISeqable$_seq$arity$1 = function(this__3341__auto__) {
   var self__ = this;
-  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y)], true), self__.__extmap))
+  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0:x", self__.x), cljs.core.vector.call(null, "\ufdd0:y", self__.y), cljs.core.vector.call(null, "\ufdd0:w", self__.w), cljs.core.vector.call(null, "\ufdd0:h", self__.h)], true), self__.__extmap))
 };
 cljsinvaders.game.Player.prototype.cljs$core$ICounted$_count$arity$1 = function(this__3333__auto__) {
   var self__ = this;
-  return 2 + cljs.core.count.call(null, self__.__extmap)
+  return 4 + cljs.core.count.call(null, self__.__extmap)
 };
 cljsinvaders.game.Player.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(this__3325__auto__, other__3326__auto__) {
   var self__ = this;
@@ -22872,9 +22988,9 @@ cljsinvaders.game.Player.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(th
     return false
   }
 };
-cljsinvaders.game.Player.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__9070) {
+cljsinvaders.game.Player.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__3328__auto__, G__26346) {
   var self__ = this;
-  return new cljsinvaders.game.Player(self__.x, self__.y, G__9070, self__.__extmap, self__.__hash)
+  return new cljsinvaders.game.Player(self__.x, self__.y, self__.w, self__.h, G__26346, self__.__extmap, self__.__hash)
 };
 cljsinvaders.game.Player.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__3327__auto__) {
   var self__ = this;
@@ -22884,10 +23000,10 @@ cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$ = true;
 cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$tick$arity$1 = function(this$) {
   var self__ = this;
   if(cljs.core.truth_(cljsinvaders.game.is_left_pressed.call(null))) {
-    return cljs.core.assoc.call(null, this$, "\ufdd0:x", self__.x - 2)
+    return cljsinvaders.game.move_left.call(null, this$, 2)
   }else {
     if(cljs.core.truth_(cljsinvaders.game.is_right_pressed.call(null))) {
-      return cljs.core.assoc.call(null, this$, "\ufdd0:x", self__.x + 2)
+      return cljsinvaders.game.move_right.call(null, this$, 2)
     }else {
       if("\ufdd0:else") {
         return this$
@@ -22897,17 +23013,20 @@ cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$tick$arity$1 = funct
     }
   }
 };
+cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$handle_event$arity$2 = function(this$, event) {
+  var self__ = this;
+  return this$
+};
 cljsinvaders.game.Player.prototype.cljsinvaders$game$Entity$render$arity$2 = function(this$, ctx) {
   var self__ = this;
-  ctx.fillStyle = "#00F";
-  return ctx.fillRect(self__.x, self__.y, 20, 20)
+  return cljsinvaders.game.draw_rect.call(null, ctx, self__.x, self__.y, self__.w, self__.h, "#FF0")
 };
 cljsinvaders.game.Player.prototype.cljs$core$IMap$_dissoc$arity$2 = function(this__3338__auto__, k__3339__auto__) {
   var self__ = this;
-  if(cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.fromArray(["\ufdd0:y", null, "\ufdd0:x", null], true), k__3339__auto__)) {
+  if(cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.fromArray(["\ufdd0:y", null, "\ufdd0:x", null, "\ufdd0:h", null, "\ufdd0:w", null], true), k__3339__auto__)) {
     return cljs.core.dissoc.call(null, cljs.core.with_meta.call(null, cljs.core.into.call(null, cljs.core.PersistentArrayMap.EMPTY, this__3338__auto__), self__.__meta), k__3339__auto__)
   }else {
-    return new cljsinvaders.game.Player(self__.x, self__.y, self__.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, self__.__extmap, k__3339__auto__)), null)
+    return new cljsinvaders.game.Player(self__.x, self__.y, self__.w, self__.h, self__.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, self__.__extmap, k__3339__auto__)), null)
   }
 };
 cljsinvaders.game.Player.cljs$lang$type = true;
@@ -22917,42 +23036,42 @@ cljsinvaders.game.Player.cljs$lang$ctorPrSeq = function(this__3363__auto__) {
 cljsinvaders.game.Player.cljs$lang$ctorPrWriter = function(this__3363__auto__, writer__3364__auto__) {
   return cljs.core._write.call(null, writer__3364__auto__, "cljsinvaders.game/Player")
 };
-cljsinvaders.game.__GT_Player = function __GT_Player(x, y) {
-  return new cljsinvaders.game.Player(x, y)
+cljsinvaders.game.__GT_Player = function __GT_Player(x, y, w, h) {
+  return new cljsinvaders.game.Player(x, y, w, h)
 };
-cljsinvaders.game.map__GT_Player = function map__GT_Player(G__9072) {
-  return new cljsinvaders.game.Player((new cljs.core.Keyword("\ufdd0:x")).call(null, G__9072), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__9072), null, cljs.core.dissoc.call(null, G__9072, "\ufdd0:x", "\ufdd0:y"))
+cljsinvaders.game.map__GT_Player = function map__GT_Player(G__26348) {
+  return new cljsinvaders.game.Player((new cljs.core.Keyword("\ufdd0:x")).call(null, G__26348), (new cljs.core.Keyword("\ufdd0:y")).call(null, G__26348), (new cljs.core.Keyword("\ufdd0:w")).call(null, G__26348), (new cljs.core.Keyword("\ufdd0:h")).call(null, G__26348), null, cljs.core.dissoc.call(null, G__26348, "\ufdd0:x", "\ufdd0:y", "\ufdd0:w", "\ufdd0:h"))
 };
 cljsinvaders.game.create_enemies = function create_enemies() {
-  var iter__3470__auto__ = function iter__9082(s__9083) {
+  var iter__3470__auto__ = function iter__26358(s__26359) {
     return new cljs.core.LazySeq(null, false, function() {
-      var s__9083__$1 = s__9083;
+      var s__26359__$1 = s__26359;
       while(true) {
-        var temp__4092__auto__ = cljs.core.seq.call(null, s__9083__$1);
+        var temp__4092__auto__ = cljs.core.seq.call(null, s__26359__$1);
         if(temp__4092__auto__) {
           var xs__4579__auto__ = temp__4092__auto__;
           var x = cljs.core.first.call(null, xs__4579__auto__);
-          var iterys__3466__auto__ = function(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__) {
-            return function iter__9084(s__9085) {
-              return new cljs.core.LazySeq(null, false, function(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__) {
+          var iterys__3466__auto__ = function(s__26359__$1, x, xs__4579__auto__, temp__4092__auto__) {
+            return function iter__26360(s__26361) {
+              return new cljs.core.LazySeq(null, false, function(s__26359__$1, x, xs__4579__auto__, temp__4092__auto__) {
                 return function() {
-                  var s__9085__$1 = s__9085;
+                  var s__26361__$1 = s__26361;
                   while(true) {
-                    var temp__4092__auto____$1 = cljs.core.seq.call(null, s__9085__$1);
+                    var temp__4092__auto____$1 = cljs.core.seq.call(null, s__26361__$1);
                     if(temp__4092__auto____$1) {
-                      var s__9085__$2 = temp__4092__auto____$1;
-                      if(cljs.core.chunked_seq_QMARK_.call(null, s__9085__$2)) {
-                        var c__3468__auto__ = cljs.core.chunk_first.call(null, s__9085__$2);
+                      var s__26361__$2 = temp__4092__auto____$1;
+                      if(cljs.core.chunked_seq_QMARK_.call(null, s__26361__$2)) {
+                        var c__3468__auto__ = cljs.core.chunk_first.call(null, s__26361__$2);
                         var size__3469__auto__ = cljs.core.count.call(null, c__3468__auto__);
-                        var b__9087 = cljs.core.chunk_buffer.call(null, size__3469__auto__);
+                        var b__26363 = cljs.core.chunk_buffer.call(null, size__3469__auto__);
                         if(function() {
-                          var i__9086 = 0;
+                          var i__26362 = 0;
                           while(true) {
-                            if(i__9086 < size__3469__auto__) {
-                              var y = cljs.core._nth.call(null, c__3468__auto__, i__9086);
-                              cljs.core.chunk_append.call(null, b__9087, new cljsinvaders.game.Enemy(x, y));
-                              var G__9088 = i__9086 + 1;
-                              i__9086 = G__9088;
+                            if(i__26362 < size__3469__auto__) {
+                              var y = cljs.core._nth.call(null, c__3468__auto__, i__26362);
+                              cljs.core.chunk_append.call(null, b__26363, new cljsinvaders.game.Enemy(x, y, 20, 20, 1));
+                              var G__26364 = i__26362 + 1;
+                              i__26362 = G__26364;
                               continue
                             }else {
                               return true
@@ -22960,13 +23079,13 @@ cljsinvaders.game.create_enemies = function create_enemies() {
                             break
                           }
                         }()) {
-                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__9087), iter__9084.call(null, cljs.core.chunk_rest.call(null, s__9085__$2)))
+                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__26363), iter__26360.call(null, cljs.core.chunk_rest.call(null, s__26361__$2)))
                         }else {
-                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__9087), null)
+                          return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__26363), null)
                         }
                       }else {
-                        var y = cljs.core.first.call(null, s__9085__$2);
-                        return cljs.core.cons.call(null, new cljsinvaders.game.Enemy(x, y), iter__9084.call(null, cljs.core.rest.call(null, s__9085__$2)))
+                        var y = cljs.core.first.call(null, s__26361__$2);
+                        return cljs.core.cons.call(null, new cljsinvaders.game.Enemy(x, y, 20, 20, 1), iter__26360.call(null, cljs.core.rest.call(null, s__26361__$2)))
                       }
                     }else {
                       return null
@@ -22974,15 +23093,15 @@ cljsinvaders.game.create_enemies = function create_enemies() {
                     break
                   }
                 }
-              }(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__), null)
+              }(s__26359__$1, x, xs__4579__auto__, temp__4092__auto__), null)
             }
-          }(s__9083__$1, x, xs__4579__auto__, temp__4092__auto__);
+          }(s__26359__$1, x, xs__4579__auto__, temp__4092__auto__);
           var fs__3467__auto__ = cljs.core.seq.call(null, iterys__3466__auto__.call(null, cljs.core.range.call(null, 0, 240, 60)));
           if(fs__3467__auto__) {
-            return cljs.core.concat.call(null, fs__3467__auto__, iter__9082.call(null, cljs.core.rest.call(null, s__9083__$1)))
+            return cljs.core.concat.call(null, fs__3467__auto__, iter__26358.call(null, cljs.core.rest.call(null, s__26359__$1)))
           }else {
-            var G__9089 = cljs.core.rest.call(null, s__9083__$1);
-            s__9083__$1 = G__9089;
+            var G__26365 = cljs.core.rest.call(null, s__26359__$1);
+            s__26359__$1 = G__26365;
             continue
           }
         }else {
@@ -22995,78 +23114,96 @@ cljsinvaders.game.create_enemies = function create_enemies() {
   return iter__3470__auto__.call(null, cljs.core.range.call(null, 0, 480, 60))
 };
 cljsinvaders.game.create_player = function create_player() {
-  return new cljsinvaders.game.Player(200, 430)
+  return new cljsinvaders.game.Player(200, 430, 20, 20)
 };
 cljsinvaders.game.create_state = function create_state() {
   return cljs.core.PersistentArrayMap.fromArray(["\ufdd0:entities", cljs.core.cons.call(null, cljsinvaders.game.create_player.call(null), cljsinvaders.game.create_enemies.call(null))], true)
 };
-cljsinvaders.game.context = function context(width, height) {
-  var target = document.getElementById("target");
-  var context__$1 = target.getContext("2d");
-  target.width = width;
-  target.height = height;
-  return context__$1
+cljsinvaders.game.filter_for_enemies = function filter_for_enemies(entities) {
+  return cljs.core.filter.call(null, cljs.core.partial.call(null, cljs.core.instance_QMARK_, cljsinvaders.game.Enemy), entities)
 };
-cljsinvaders.game.get_next_state = function get_next_state(p__9090) {
-  var map__9092 = p__9090;
-  var map__9092__$1 = cljs.core.seq_QMARK_.call(null, map__9092) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9092) : map__9092;
-  var state = map__9092__$1;
-  var entities = cljs.core.get.call(null, map__9092__$1, "\ufdd0:entities");
-  return cljs.core.assoc.call(null, state, "\ufdd0:entities", cljs.core.map.call(null, cljsinvaders.game.tick, entities))
+cljsinvaders.game.apply_event = function apply_event(event, p__26367) {
+  var map__26369 = p__26367;
+  var map__26369__$1 = cljs.core.seq_QMARK_.call(null, map__26369) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26369) : map__26369;
+  var state = map__26369__$1;
+  var entities = cljs.core.get.call(null, map__26369__$1, "\ufdd0:entities");
+  return cljs.core.assoc.call(null, state, "\ufdd0:entities", cljs.core.map.call(null, function(p1__26366_SHARP_) {
+    return cljsinvaders.game.handle_event.call(null, p1__26366_SHARP_, event)
+  }, entities))
 };
-cljsinvaders.game.clear_screen = function clear_screen(ctx) {
-  ctx.fillStyle = "#000";
-  return ctx.fillRect(0, 0, cljsinvaders.game.canvas_width, cljsinvaders.game.canvas_height)
+cljsinvaders.game.check_enemy_direction = function check_enemy_direction(p__26370) {
+  var map__26372 = p__26370;
+  var map__26372__$1 = cljs.core.seq_QMARK_.call(null, map__26372) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26372) : map__26372;
+  var state = map__26372__$1;
+  var entities = cljs.core.get.call(null, map__26372__$1, "\ufdd0:entities");
+  var enemies = cljsinvaders.game.filter_for_enemies.call(null, entities);
+  var min_left = cljs.core.apply.call(null, cljs.core.min, cljs.core.map.call(null, cljsinvaders.game.rect_left, enemies));
+  var max_right = cljs.core.apply.call(null, cljs.core.max, cljs.core.map.call(null, cljsinvaders.game.rect_right, enemies));
+  if(function() {
+    var or__3943__auto__ = 640 < max_right;
+    if(or__3943__auto__) {
+      return or__3943__auto__
+    }else {
+      return 0 > min_left
+    }
+  }()) {
+    return cljsinvaders.game.apply_event.call(null, "\ufdd0:enemy-direction-changed", state)
+  }else {
+    return state
+  }
 };
-cljsinvaders.game.game_tick = function game_tick(ctx, p__9093) {
-  var map__9099 = p__9093;
-  var map__9099__$1 = cljs.core.seq_QMARK_.call(null, map__9099) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9099) : map__9099;
-  var state = map__9099__$1;
-  var entities = cljs.core.get.call(null, map__9099__$1, "\ufdd0:entities");
+cljsinvaders.game.get_next_state = function get_next_state(state) {
+  return cljsinvaders.game.check_enemy_direction.call(null, cljs.core.update_in.call(null, state, cljs.core.PersistentVector.fromArray(["\ufdd0:entities"], true), cljs.core.partial.call(null, cljs.core.map, cljsinvaders.game.tick)))
+};
+cljsinvaders.game.game_tick = function game_tick(ctx, p__26373) {
+  var map__26379 = p__26373;
+  var map__26379__$1 = cljs.core.seq_QMARK_.call(null, map__26379) ? cljs.core.apply.call(null, cljs.core.hash_map, map__26379) : map__26379;
+  var state = map__26379__$1;
+  var entities = cljs.core.get.call(null, map__26379__$1, "\ufdd0:entities");
   cljsinvaders.game.clear_screen.call(null, ctx);
-  var seq__9100_9104 = cljs.core.seq.call(null, entities);
-  var chunk__9101_9105 = null;
-  var count__9102_9106 = 0;
-  var i__9103_9107 = 0;
+  var seq__26380_26384 = cljs.core.seq.call(null, entities);
+  var chunk__26381_26385 = null;
+  var count__26382_26386 = 0;
+  var i__26383_26387 = 0;
   while(true) {
-    if(i__9103_9107 < count__9102_9106) {
-      var e_9108 = cljs.core._nth.call(null, chunk__9101_9105, i__9103_9107);
-      cljsinvaders.game.render.call(null, e_9108, ctx);
-      var G__9109 = seq__9100_9104;
-      var G__9110 = chunk__9101_9105;
-      var G__9111 = count__9102_9106;
-      var G__9112 = i__9103_9107 + 1;
-      seq__9100_9104 = G__9109;
-      chunk__9101_9105 = G__9110;
-      count__9102_9106 = G__9111;
-      i__9103_9107 = G__9112;
+    if(i__26383_26387 < count__26382_26386) {
+      var e_26388 = cljs.core._nth.call(null, chunk__26381_26385, i__26383_26387);
+      cljsinvaders.game.render.call(null, e_26388, ctx);
+      var G__26389 = seq__26380_26384;
+      var G__26390 = chunk__26381_26385;
+      var G__26391 = count__26382_26386;
+      var G__26392 = i__26383_26387 + 1;
+      seq__26380_26384 = G__26389;
+      chunk__26381_26385 = G__26390;
+      count__26382_26386 = G__26391;
+      i__26383_26387 = G__26392;
       continue
     }else {
-      var temp__4092__auto___9113 = cljs.core.seq.call(null, seq__9100_9104);
-      if(temp__4092__auto___9113) {
-        var seq__9100_9114__$1 = temp__4092__auto___9113;
-        if(cljs.core.chunked_seq_QMARK_.call(null, seq__9100_9114__$1)) {
-          var c__3501__auto___9115 = cljs.core.chunk_first.call(null, seq__9100_9114__$1);
-          var G__9116 = cljs.core.chunk_rest.call(null, seq__9100_9114__$1);
-          var G__9117 = c__3501__auto___9115;
-          var G__9118 = cljs.core.count.call(null, c__3501__auto___9115);
-          var G__9119 = 0;
-          seq__9100_9104 = G__9116;
-          chunk__9101_9105 = G__9117;
-          count__9102_9106 = G__9118;
-          i__9103_9107 = G__9119;
+      var temp__4092__auto___26393 = cljs.core.seq.call(null, seq__26380_26384);
+      if(temp__4092__auto___26393) {
+        var seq__26380_26394__$1 = temp__4092__auto___26393;
+        if(cljs.core.chunked_seq_QMARK_.call(null, seq__26380_26394__$1)) {
+          var c__3501__auto___26395 = cljs.core.chunk_first.call(null, seq__26380_26394__$1);
+          var G__26396 = cljs.core.chunk_rest.call(null, seq__26380_26394__$1);
+          var G__26397 = c__3501__auto___26395;
+          var G__26398 = cljs.core.count.call(null, c__3501__auto___26395);
+          var G__26399 = 0;
+          seq__26380_26384 = G__26396;
+          chunk__26381_26385 = G__26397;
+          count__26382_26386 = G__26398;
+          i__26383_26387 = G__26399;
           continue
         }else {
-          var e_9120 = cljs.core.first.call(null, seq__9100_9114__$1);
-          cljsinvaders.game.render.call(null, e_9120, ctx);
-          var G__9121 = cljs.core.next.call(null, seq__9100_9114__$1);
-          var G__9122 = null;
-          var G__9123 = 0;
-          var G__9124 = 0;
-          seq__9100_9104 = G__9121;
-          chunk__9101_9105 = G__9122;
-          count__9102_9106 = G__9123;
-          i__9103_9107 = G__9124;
+          var e_26400 = cljs.core.first.call(null, seq__26380_26394__$1);
+          cljsinvaders.game.render.call(null, e_26400, ctx);
+          var G__26401 = cljs.core.next.call(null, seq__26380_26394__$1);
+          var G__26402 = null;
+          var G__26403 = 0;
+          var G__26404 = 0;
+          seq__26380_26384 = G__26401;
+          chunk__26381_26385 = G__26402;
+          count__26382_26386 = G__26403;
+          i__26383_26387 = G__26404;
           continue
         }
       }else {

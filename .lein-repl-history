@@ -1,3 +1,16 @@
 exit
 (in-ns cljsinvaders.game)
 exit
+(doc instance)
+(doc instance?)
+(doc min)
+(min [1 4 5 6])
+(apply min [1 2 5 6 7])
+(defn check-enemy-direction [{:keys entities :as state}]
+  (let [enemies (filter-for-enemies entities)
+        min-left (apply min (map left enemies))
+        max-right (apply max (map right enemies)) ]
+    (if (or (< 640 max-right) (> 0 min-left))
+      (apply-event :enemy-direction-changed state) state)))
+(doc map)
+(doc partial)
