@@ -9,6 +9,7 @@
         :compiler {
           :output-to "resources/public/game.js"
           :optimizations :whitespace
-          :pretty-print true}}]} 
+          :pretty-print true
+                   }}]} 
 )
 

@@ -18,3 +18,5 @@ exit
 (doseq [x { :one "one" :two "two"}] (println x))
 (doc first)
 (doc find)
+(doc conj)
+(doc first)

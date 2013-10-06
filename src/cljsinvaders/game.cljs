@@ -18,7 +18,7 @@
   (assoc rect :x (+ (:x rect) amount)))
 
 (defn move-up [rect amount]
-  (assoc rect :y (- (:- rect) amount)))
+  (assoc rect :y (- (:y rect) amount)))
 
 (defn draw-rect [ctx x y w h colour]
   (set! (. ctx -fillStyle) colour) 
@@ -64,7 +64,9 @@
 
 (defrecord Bullet [x y w h]
   Entity
-  (tick [this] (move-up this 2))
+  (tick [this]
+    (log x y w h)
+    (move-up this 5))
   (handle-event [this event] this)
   (render [this ctx] (draw-rect ctx x y w h "#F00")))
 
@@ -100,15 +102,11 @@
     (if (or (< 640 max-right) (> 0 min-left))
       (apply-event :enemy-direction-changed state) state)))
 
-(defn can-fire [state]
-  (= (:last-firing-ticks state) 0))
-
 (defn try-firing [{:keys [entities last-firing-ticks] :as state}]
   (if (and (is-fire-pressed) (= last-firing-ticks 0))
     (assoc state :entities (conj entities (create-bullet (get-player entities)))
                  :last-firing-ticks 1) 
     state))
-
 
 (defn get-next-state [state]
   (-> state
